@@ -17,19 +17,26 @@ class Game {
   }
 
   registerEvents() {
-    /*
-      TODO:
-      Написать обработчик события, который откликается
-      на каждый введённый символ.
-      В случае правильного ввода слова вызываем this.success()
-      При неправильном вводе символа - this.fail();
-     */
+    let a = this;
+    document.addEventListener('keydown', function(event){
+      let currWord = document.querySelector('span.symbol_current');
+
+      if(currWord.textContent.toLowerCase() === event.key.toLowerCase()){
+        let winsElement = document.querySelector('.status__wins');
+        return a.success();
+      } else {
+        return a.fail();
+      }
+    });
   }
 
   success() {
     this.currentSymbol.classList.add('symbol_correct');
+    this.currentSymbol.classList.toggle('symbol_current');
     this.currentSymbol = this.currentSymbol.nextElementSibling;
+
     if (this.currentSymbol !== null) {
+      this.currentSymbol.classList.toggle('symbol_current');
       return;
     }
 
