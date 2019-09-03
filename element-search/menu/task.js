@@ -14,16 +14,17 @@ function openMenu(){
   let closestMenu = document.querySelector(`li.menu__item > a#${this.id} +ul.menu`);
 
   if(closestMenu !== null && closestMenu !== undefined){
-    closestMenu.className = closestMenu.className + ' menu_active';
+    closestMenu.classList.add('menu_active');
     if(currentMenu !== undefined) {
       let closePreviousMenu = document.querySelector(`li.menu__item > a#${currentMenu} +ul.menu`);
-      closePreviousMenu.className = closePreviousMenu.className.replace(' menu_active', '');
+      closePreviousMenu.classList.remove('menu_active');
     }
 
     currentMenu = this.id;
     return false;
   }
 }
+
 //задать всем событие
 for (let i=0; i<menusCount; i++){
   menus.item(i).onclick = openMenu;
