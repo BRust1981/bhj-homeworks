@@ -11,9 +11,10 @@ const textMessage = document.getElementById('chat-widget__input');
 
 textMessage.addEventListener('keydown', function(event) {
   if(event.code === 'Enter' && this.value !== undefined){
-    //console.log(this.value);
+    console.log(this.value);
     putMessage('message_client', this.value);
     talkToMeRobot(this.value);   //Типа отправляем вопрос роботу
+    this.value = null;
   }
 })
 
@@ -31,5 +32,4 @@ function putMessage(who, message){
 function talkToMeRobot(message){
   let messageNumber = Math.trunc(Math.random() * arrayMessages.length);
   putMessage('', arrayMessages[messageNumber]);
-
 }
