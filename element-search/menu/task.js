@@ -11,11 +11,11 @@ for (let i = 0; i < menusCount; i++){
 }
 
 function openMenu(){
-  let closestMenu = document.querySelector(`li.menu__item > a#${this.id} +ul.menu`);
+  let closestMenu = document.querySelector(`li.menu__item > a#${this.id} + ul.menu`);
 
   if(closestMenu !== null && closestMenu !== undefined){
-    closestMenu.classList.add('menu_active');
-    if(currentMenu !== undefined) {
+    closestMenu.classList.toggle('menu_active');
+    if(currentMenu !== undefined && currentMenu !== this.id) {
       let closePreviousMenu = document.querySelector(`li.menu__item > a#${currentMenu} +ul.menu`);
       closePreviousMenu.classList.remove('menu_active');
     }
