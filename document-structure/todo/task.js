@@ -27,4 +27,5 @@ taskForm.onsubmit = function(event) {
   createTask(inputField.value);
   this.reset();
   inputField.focus();
+  event.preventDefault();
 };

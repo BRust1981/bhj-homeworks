@@ -3,24 +3,25 @@
 const tooltips = document.querySelectorAll('.has-tooltip');
 
 Array.from(tooltips).map(el => {
-  el.insertAdjacentHTML('afterBegin', `<span class="tooltip">${el.title}</span>`);
-});
-
-Array.from(tooltips).map(el => {
   el.onclick = function(){
-    //console.log('wow');
-    let currTooltip = this.querySelector('.tooltip');
-    hideAllTooltips(currTooltip);
-    currTooltip.classList.toggle('tooltip_active');
+    let top = this.getBoundingClientRect().top;
+    let left = this.getBoundingClientRect().left;
+
+    let currTooltip = document.querySelector('.tooltip');
+    // Да, не очень хорошее условие, особенно еслитултипы будут совпадать. Но в данных рамках задачи пока так
+    // Это чтобы при нажатии на другой ссылке, тултип менял позицию и текст и скрывался при нажатии на той же ссылке
+    if(currTooltip.innerText === this.title){
+      currTooltip.classList.toggle('tooltip_active');
+    } else {
+      currTooltip.classList.add('tooltip_active');
+    }
+
+    currTooltip.innerText = this.title;
+    
+    // С небольшим сдвигом
+    currTooltip.style.top = top + 20 + 'px';
+    currTooltip.style.left = left + 20 + 'px';
+    currTooltip.style.position = 'fixed';
     return false;
   };
 });
-
-function hideAllTooltips(elem){
-  const activeTooltip = document.querySelector('.tooltip_active');
-  console.log(elem);
-  console.log(activeTooltip);
-  if(activeTooltip !== null && activeTooltip !== elem) {
-    activeTooltip.classList.remove('tooltip_active');
-  }
-}
